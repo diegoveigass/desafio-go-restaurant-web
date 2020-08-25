@@ -53,7 +53,11 @@ const Dashboard: React.FC = () => {
     food: Omit<IFoodPlate, 'id' | 'available'>,
   ): Promise<void> {
     // TODO UPDATE A FOOD PLATE ON THE API
-    const response = await api.put(`/foods/${editingFood.id}`, food);
+    const response = await api.put(`/foods/${editingFood.id}`, {
+      ...food,
+      available: editingFood.available,
+      id: editingFood.id,
+    });
 
     const newFoods = foods.filter(newFood => newFood.id !== editingFood.id);
 
